@@ -24,8 +24,14 @@ def messages_to_string(messages, sep="\n<br/><br/>\n"):
 
 
 class MailNotifier(object):
+    """
+        SL Twitter Monitor
+        Set default values for search term, mail server/port/user/password, from
+        and to addresses here. These defaults can be overloaded below when creating
+        an instance of this class
+    """
     def __init__(self, search="softlayer", server="smtp.gmail.com",
-                 to="some_email@example.com",
+                 to="SET ME",
                  port=587, user=None, password=None, from_=None):
         self.search_term = search
         self.server = server
@@ -104,12 +110,20 @@ class MailNotifier(object):
 
 
 if __name__ == "__main__":
-    api = twitter.Api(consumer_key='',
-        consumer_secret='',
-        access_token_key='',
-        access_token_secret='')
+    """
+        Enter twitter API information here
+    """
+    api = twitter.Api(consumer_key='SET ME',
+        consumer_secret='SET ME',
+        access_token_key='SET ME',
+        access_token_secret='SET ME')
 
-    notifier = MailNotifier(user='some_user@gmail.com', password='some_password', to='some_email@example.com')
+    """
+        Enter email authentication, search term, and to email address here. If not set here the default values
+        above will be used. Mail server infromation defaults to gmail
+    """
+    notifier = MailNotifier(user='SET ME', password='SET ME', to='SET ME',
+        search='SET ME')
     unformatted_body, count = notifier.status_by_search(notifier.search_term)
     body = messages_to_string(unformatted_body)
 
