@@ -96,7 +96,7 @@ class MailNotifier(object):
             return True
 
     def status_by_search(self, search):
-        statuses = api.GetSearch(term=search, per_page=100)
+        statuses = api.GetSearch(term=search, count=100)
         results = filter(lambda x: x.id > self.log_value, statuses)
         returns = []
         if len(results) > 0:
